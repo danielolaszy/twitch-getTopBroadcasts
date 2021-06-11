@@ -4,7 +4,9 @@ import Card from "./Card";
 const Grid = () => {
   return (
     <>
-      <Card />
+      <div className="row row-cols-4 g-3 my-5 text-center ">
+        <Card />
+      </div>
     </>
   );
 };
