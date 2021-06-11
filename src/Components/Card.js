@@ -15,7 +15,7 @@ const Card = () => {
   const [streams, setStreams] = useState([]);
 
   const getStreams = async () => {
-    const response = await twitchApi.get("streams?first=100");
+    const response = await twitchApi.get("streams?first=20");
     const streams = await response.data.data;
     setStreams(streams);
     console.log(streams);
@@ -30,15 +30,23 @@ const Card = () => {
 
   return (
     <>
-      {streams.map((stream) => {
-        const { user_id, user_name, viewer_count } = stream;
-        return (
-          <section className="col-4 test rounded-3" id={user_id} key={user_id}>
-            <h1>{user_name}</h1>
-            <h4>{viewer_count}</h4>
-          </section>
-        );
-      })}
+      <div className="row row-cols-4 g-3 text-center">
+        {streams.map((stream) => {
+          const { user_id, user_name, viewer_count } = stream;
+          return (
+            <section className="col">
+              <div
+                id={user_id}
+                key={user_id}
+                className="card bg-light rounded-3 border py-4"
+              >
+                <h1 className="py-3">{user_name}</h1>
+                <h6>{viewer_count}</h6>
+              </div>
+            </section>
+          );
+        })}
+      </div>
     </>
   );
 };
