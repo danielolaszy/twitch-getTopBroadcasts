@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Card = () => {
   // Setting base URL and headers to connect to API
@@ -12,10 +12,34 @@ const Card = () => {
     },
   });
 
+  const [streams, setStreams] = useState([]);
+
+  const getStreams = async () => {
+    const response = await twitchApi.get("streams?first=100");
+    const streams = await response.data.data;
+    setStreams(streams);
+    console.log(streams);
+  };
+
+  useEffect(() => {
+    getStreams();
+    //   return () => {
+    //       cleanup
+    //   }
+  }, []);
+
   return (
-    <div>
-      <h1>testing card</h1>
-    </div>
+    <>
+      {streams.map((stream) => {
+        const { user_id, user_name, viewer_count } = stream;
+        return (
+          <section className="col-4 test rounded-3" id={user_id} key={user_id}>
+            <h1>{user_name}</h1>
+            <h4>{viewer_count}</h4>
+          </section>
+        );
+      })}
+    </>
   );
 };
 
