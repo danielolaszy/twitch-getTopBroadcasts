@@ -35,6 +35,7 @@ const Card = () => {
 
         const title = stream.title.substring(0, 32) + "...";
         const viewers = stream.viewer_count.toLocaleString("en-US");
+
         return (
           <section className="col">
             <div
