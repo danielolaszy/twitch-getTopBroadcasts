@@ -19,6 +19,7 @@ const Card = () => {
     const response = await twitchApi.get("streams?first=20");
     const streams = await response.data.data;
     setStreams(streams);
+    console.log(streams);
   };
   console.log(streams);
   useEffect(() => {
@@ -49,7 +50,15 @@ const Card = () => {
                 ></img>
               </a>
               <h3 className="py-2">{stream.user_name}</h3>
-              <h6>Playing {stream.game_name}</h6>
+              <a
+                className="text-decoration-none text-reset"
+                href={
+                  "https://www.twitch.tv/directory/game/" +
+                  stream.game_name.replaceAll(/\s/g, "%20")
+                }
+              >
+                <h6>Playing {stream.game_name}</h6>
+              </a>
 
               <p className="text-break">
                 <small>{title}</small>
