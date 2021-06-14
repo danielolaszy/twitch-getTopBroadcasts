@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+
 import { useState, useEffect } from "react";
 
 const Card = () => {
@@ -13,70 +14,47 @@ const Card = () => {
   });
 
   const [streams, setStreams] = useState([]);
-  const [users, setUsers] = useState([]);
 
   const getStreams = async () => {
     const response = await twitchApi.get("streams?first=20");
     const streams = await response.data.data;
-
     setStreams(streams);
   };
-  const getProfilePicture = async (id) => {
-    const response = await twitchApi.get("users?id=" + id);
-    const users = await response.data.data;
-    setUsers(users);
-  };
-  const ids = streams.map((stream) => {
-    return stream.user_id;
-  });
-
-  console.log(...ids);
-
+  console.log(streams);
   useEffect(() => {
     getStreams();
-
-    //   return () => {
-    //       cleanup
-    //   }
   }, []);
-  // console.log(streams);
 
-  useEffect(() => {
-    getProfilePicture(1);
-    // return () => {
-    //   cleanup
-    // }
-  }, []);
   return (
     <>
-      {/* {users.map((user) => {
-        const {}
-      })} */}
       {streams.map((stream) => {
-        const { user_id, user_name, viewer_count } = stream;
+        const thumbnail = stream.thumbnail_url
+          .replace("{width}", "1280")
+          .replace("{height}", "720");
+
+        const title = stream.title.substring(0, 32) + "...";
+        const viewers = stream.viewer_count.toLocaleString("en-US");
         return (
           <section className="col">
             <div
-              id={user_id}
-              key={user_id}
-              className="bg-light rounded-3 border py-4"
+              id={stream.user_id}
+              key={stream.user_id}
+              className="bg-light rounded-3 border"
             >
-              {users.map((user) => {
-                const { id, profile_image_url, login } = user;
-                return (
-                  <img
-                    key={id}
-                    id={id}
-                    className="rounded-circle w-25 mx-auto"
-                    src={profile_image_url}
-                    alt={login}
-                  ></img>
-                );
-              })}
+              <a href={"https://twitch.tv/" + stream.user_login}>
+                <img
+                  className="w-100 rounded-top"
+                  src={thumbnail}
+                  alt={stream.title}
+                ></img>
+              </a>
+              <h3 className="py-2">{stream.user_name}</h3>
+              <h6>Playing {stream.game_name}</h6>
 
-              <h3 className="py-3">{user_name}</h3>
-              <h6 className="text-danger">{viewer_count}</h6>
-              <p>{user_id}</p>
+              <p className="text-break">
+                <small>{title}</small>
+              </p>
+              <h6 className="text-danger mb-3">{viewers}</h6>
             </div>
           </section>
         );
