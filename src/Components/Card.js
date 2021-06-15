@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import { FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
 const Card = () => {
@@ -41,7 +41,7 @@ const Card = () => {
                 <img className="w-100 rounded-top" src={thumbnail} alt={stream.title}></img>
               </a>
               <h3 className="py-2 m-0">
-                <a className="api-link text-decoration-none" href={"https://twitch.tv/" + stream.user_login}>
+                <a className="text-decoration-none" href={"https://twitch.tv/" + stream.user_login}>
                   {stream.user_name}
                 </a>
               </h3>
@@ -51,12 +51,17 @@ const Card = () => {
                   <br />
                 </p>
                 <h6>
-                  <a className="text-decoration-none api-link" href={"https://www.twitch.tv/directory/game/" + stream.game_name.replaceAll(/\s/g, "%20")}>
+                  <a className="text-decoration-none" href={"https://www.twitch.tv/directory/game/" + stream.game_name.replaceAll(/\s/g, "%20")}>
                     {stream.game_name}
                   </a>
                 </h6>
               </div>
-              <h6 className="text-danger m-0 pb-3">{viewers}</h6>
+              <div className="text-danger m-0 pb-3">
+                <h6 className="d-flex align-items-center justify-content-center">
+                  <FaUser />
+                  {viewers}
+                </h6>
+              </div>
             </div>
           </section>
         );

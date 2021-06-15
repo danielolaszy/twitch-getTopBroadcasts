@@ -1,16 +1,26 @@
 .textColor {
-  color: #f0f0ff;
+  color: #fafafa;
 }
 
 body {
   background-color: #18171d;
 }
+* {
+  -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+  display: none;
+}
 .api-card {
   background-color: #222127;
 }
-.api-link {
-  color: #fafafa;
+
+a {
+  color: #fafafa !important;
+  text-decoration: none;
+  transition: 0.1s;
 }
-.api-link:hover {
-  color: #9246ff;
+a:hover {
+  color: #9246ff !important;
+  transition: 0.1s;
 }
