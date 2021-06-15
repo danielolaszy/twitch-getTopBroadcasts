@@ -30,8 +30,6 @@ const Card = () => {
     <>
       {streams.map((stream) => {
         const thumbnail = stream.thumbnail_url.replace("{width}", "854").replace("{height}", "480");
-
-        const title = stream.title.substring(0, 32) + "...";
         const viewers = stream.viewer_count.toLocaleString("en-US");
 
         return (
@@ -59,7 +57,7 @@ const Card = () => {
               <div className="text-danger m-0 pb-3">
                 <h6 className="d-flex align-items-center justify-content-center">
                   <FaUser />
-                  {viewers}
+                  <div className="ps-1">{viewers}</div>
                 </h6>
               </div>
             </div>

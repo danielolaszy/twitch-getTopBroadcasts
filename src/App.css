@@ -18,9 +18,9 @@ body {
 a {
   color: #fafafa !important;
   text-decoration: none;
-  transition: 0.1s;
+  transition: 0.15s;
 }
 a:hover {
   color: #9246ff !important;
-  transition: 0.1s;
+  transition: 0.15s;
 }
