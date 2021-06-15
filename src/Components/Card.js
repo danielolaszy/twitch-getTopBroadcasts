@@ -29,52 +29,34 @@ const Card = () => {
   return (
     <>
       {streams.map((stream) => {
-        const thumbnail = stream.thumbnail_url
-          .replace("{width}", "854")
-          .replace("{height}", "480");
+        const thumbnail = stream.thumbnail_url.replace("{width}", "854").replace("{height}", "480");
 
         const title = stream.title.substring(0, 32) + "...";
         const viewers = stream.viewer_count.toLocaleString("en-US");
 
         return (
           <section className="col">
-            <div
-              id={stream.user_id}
-              key={stream.user_id}
-              className="api-card rounded-3 border-dark textColor"
-            >
+            <div id={stream.user_id} key={stream.user_id} className="api-card rounded-3 border-dark textColor">
               <a href={"https://twitch.tv/" + stream.user_login}>
-                <img
-                  className="w-100 rounded-top"
-                  src={thumbnail}
-                  alt={stream.title}
-                ></img>
+                <img className="w-100 rounded-top" src={thumbnail} alt={stream.title}></img>
               </a>
-              <h3 className="py-2">
-                <a
-                  className="api-link text-decoration-none"
-                  href={"https://twitch.tv/" + stream.user_login}
-                >
+              <h3 className="py-2 m-0">
+                <a className="api-link text-decoration-none" href={"https://twitch.tv/" + stream.user_login}>
                   {stream.user_name}
                 </a>
               </h3>
-
-              <h6>
-                Playing{" "}
-                <a
-                  className="text-decoration-none  api-link"
-                  href={
-                    "https://www.twitch.tv/directory/game/" +
-                    stream.game_name.replaceAll(/\s/g, "%20")
-                  }
-                >
-                  {stream.game_name}
-                </a>
-              </h6>
-              <p className="text-break">
-                <small>{title}</small>
-              </p>
-              <h6 className="text-danger pb-3">{viewers}</h6>
+              <div className="py-2">
+                <p className="m-0">
+                  <small>Playing</small>
+                  <br />
+                </p>
+                <h6>
+                  <a className="text-decoration-none api-link" href={"https://www.twitch.tv/directory/game/" + stream.game_name.replaceAll(/\s/g, "%20")}>
+                    {stream.game_name}
+                  </a>
+                </h6>
+              </div>
+              <h6 className="text-danger m-0 pb-3">{viewers}</h6>
             </div>
           </section>
         );

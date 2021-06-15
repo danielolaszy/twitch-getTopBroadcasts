@@ -6,7 +6,7 @@ const Grid = () => {
   return (
     <>
       <Header />
-      <div className="row row-cols-4 g-3 mb-3 text-center ">
+      <div className="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-1 g-3 mb-3 text-center ">
         <Card />
       </div>
     </>
