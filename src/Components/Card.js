@@ -1,31 +1,32 @@
 import React from "react";
 import axios from "axios";
+import qs from "qs"; // used to oAuth token
 import { FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
 
 const Card = () => {
+  const [streams, setStreams] = useState([]);
+  const [accessToken, setAccessToken] = useState("");
+
   // Setting base URL and headers to connect to API
   const twitchApi = axios.create({
     baseURL: "https://api.twitch.tv/helix/",
     headers: {
-      "Authorization": "Bearer " + process.env.REACT_APP_ACCESS_TOKEN,
+      "Authorization": "Bearer " + process.env.REACT_APP_CLIENT_ACCESS_TOKEN,
       "Client-Id": process.env.REACT_APP_CLIENT_ID,
     },
   });
-
-  const [streams, setStreams] = useState([]);
 
   const getStreams = async () => {
     const response = await twitchApi.get("streams?first=100");
     const streams = await response.data.data;
     setStreams(streams);
-    console.log(streams);
   };
-  console.log(streams);
+
   useEffect(() => {
     getStreams();
+    // getAccessToken();
   }, []);
-
   return (
     <>
       {streams.map((stream) => {
@@ -49,7 +50,10 @@ const Card = () => {
                   <br />
                 </p>
                 <h6>
-                  <a className="text-decoration-none" href={"https://www.twitch.tv/directory/game/" + stream.game_name.replaceAll(/\s/g, "%20")}>
+                  <a
+                    className="text-decoration-none"
+                    href={"https://www.twitch.tv/directory/game/" + stream.game_name.replaceAll(/\s/g, "%20")}
+                  >
                     {stream.game_name}
                   </a>
                 </h6>
