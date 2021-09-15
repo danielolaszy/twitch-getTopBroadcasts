@@ -19,7 +19,7 @@ To get the project running locally, follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/Voiidv2/twitch-getTopBroadcasts
+   git clone https://github.com/danielolaszy/twitch-getTopBroadcasts
    ```
 2. Install npm packages
    ```sh
