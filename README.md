@@ -2,7 +2,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/Voiidv2/twitch-getTopBroadcasts)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/danielolaszy/twitch-getTopBroadcasts)
 
 This is a React web app which queries the Twitch API and displays the top broadcasts that are live on Twitch.
 
